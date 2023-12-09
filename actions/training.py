@@ -12,9 +12,9 @@ class TrainingDeepLearningModel:
         self.num_epochs = num_epochs
 
     def dry_run_training(self):
-        for epoch in range (0, 100, 1):
-            print(f"Training {self.model.__name__} in dry run mode. Epoch {epoch}")
-            time.sleep(10)
+        for epoch in range (self.num_epochs):
+            print(f"Training {self.model._name} in dry run mode. Epoch {epoch+1}")
+            time.sleep(1)
             
 
     def wet_run_training(self):

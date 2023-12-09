@@ -7,9 +7,11 @@ from transformers import BertModel
 class BERTNewsVerificationModel(nn.Module):
     def __init__(self):
         super(BERTNewsVerificationModel, self).__init__()
+        self._name = 'BERT'
         self.bert = BertModel.from_pretrained('bert-base-uncased')
         self.drop = nn.Dropout(p=0.3)
-        self.conv_layer = nn.Conv1d(in_channels=self.bert.config.hidden_size, out_channels=32, kernel_size=3, padding=1)
+        self.conv_layer = nn.Conv1d(in_channels=self.bert.config.hidden_size, 
+                                    out_channels=32, kernel_size=3, padding=1)
         self.fc_text = nn.Linear(32, 64)
         self.fc_numeric = nn.Linear(1, 64)
         self.fc_combined = nn.Linear(128, 2)
