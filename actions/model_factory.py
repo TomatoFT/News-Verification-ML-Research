@@ -1,7 +1,8 @@
+from models.AlBERT import AlBERTNewsVerificationModel
 from models.BERT import BERTNewsVerificationModel
 from models.DistilBERT import DistilBERTNewsVerificationModel
+from models.FlauBERT import FlauBERTNewsVerificationModel
 from models.RoBERTa import RoBERTaNewsVerificationModel
-from models.AlBERT import AlBERTNewsVerificationModel
 
 
 class ModelsFactory:
@@ -17,5 +18,7 @@ class ModelsFactory:
             return RoBERTaNewsVerificationModel()
         elif self.type == 'AlBERT':
             return AlBERTNewsVerificationModel()
+        elif self.type == 'FlauBERT':
+            return FlauBERTNewsVerificationModel()
         else:
             raise ValueError(f'The type is incorrect. Model {self.type} is implemented yet!')

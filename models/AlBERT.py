@@ -1,7 +1,8 @@
 import torch
 import torch.nn as nn
-from transformers import AlbertModel
 import torch.nn.functional as F
+from transformers import AlbertModel
+
 
 class AlBERTNewsVerificationModel(nn.Module):
     def __init__(self):

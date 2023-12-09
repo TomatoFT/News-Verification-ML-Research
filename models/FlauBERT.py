@@ -1,24 +1,25 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from transformers import RobertaModel
+from torch.utils.data import DataLoader, Dataset
+from transformers import FlaubertModel, FlaubertTokenizer
 
 
-class RoBERTaNewsVerificationModel(nn.Module):
-    def __init__(self):
-        super(RoBERTaNewsVerificationModel, self).__init__()
-        self._name = 'RoBERTa'
-        self.roberta = RobertaModel.from_pretrained('roberta-base')
+class FlauBERTNewsVerificationModel(nn.Module):
+    def __init__(self, n_classes):
+        super(FlauBERTNewsVerificationModel, self).__init__()
+        self._name = 'FlauBERT'
+        self.flaubert = FlaubertModel.from_pretrained('flaubert/flaubert_base_cased')
         self.drop = nn.Dropout(p=0.3)
-        self.conv_layer = nn.Conv1d(in_channels=self.roberta.config.hidden_size, out_channels=32, kernel_size=3, padding=1)
+        self.conv_layer = nn.Conv1d(in_channels=self.flaubert.config.hidden_size, out_channels=32, kernel_size=3, padding=1)
         self.fc_text = nn.Linear(32, 64)
         self.fc_numeric = nn.Linear(1, 64)
-        self.fc_combined = nn.Linear(128, 2)
+        self.fc_combined = nn.Linear(128, n_classes)
         nn.init.normal_(self.fc_combined.weight, std=0.02)
         nn.init.normal_(self.fc_combined.bias, 0)
 
     def forward(self, input_ids, attention_mask, numeric):
-        output = self.roberta(
+        output = self.flaubert(
             input_ids=input_ids,
             attention_mask=attention_mask,
             return_dict=True
