@@ -18,7 +18,7 @@ config = read_config(file_path='config.yaml')
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 for model_index in config['models']:
-    model = ModelsFactory(type=config[model][model_index]).get_model()
+    model = ModelsFactory(type=model_index).get_model()
 
     tokenizer_type = TokenizerFactory(type=model._name).get_tokenizer()
 

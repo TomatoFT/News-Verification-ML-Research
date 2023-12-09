@@ -7,7 +7,7 @@ from transformers import AlbertModel
 class AlBERTNewsVerificationModel(nn.Module):
     def __init__(self):
         super(AlBERTNewsVerificationModel, self).__init__()
-        self_name = 'AlBERT'
+        self._name = 'AlBERT'
         self.albert = AlbertModel.from_pretrained('albert-base-v2')
         self.drop = nn.Dropout(p=0.3)
         self.conv_layer = nn.Conv1d(in_channels=self.albert.config.hidden_size, out_channels=32, kernel_size=3, padding=1)
