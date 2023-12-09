@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 from transformers import CamembertModel
 
+
 class CamemBERTNewsVerificationModel(nn.Module):
     def __init__(self):
         super(CamemBERTNewsVerificationModel, self).__init__()

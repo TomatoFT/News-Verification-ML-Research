@@ -1,7 +1,7 @@
-from transformers import (AlbertTokenizer, BertTokenizer, DistilBertTokenizer,
+from transformers import (AlbertTokenizer, AutoTokenizer, BertTokenizer,
+                          CamembertTokenizer, DistilBertTokenizer,
                           FlaubertTokenizer, MobileBertTokenizer,
-                          RobertaTokenizer, XLMRobertaTokenizer,
-                          CamembertTokenizer)
+                          RobertaTokenizer, XLMRobertaTokenizer)
 
 
 class Tokenizer:
@@ -31,5 +31,7 @@ class TokenizerFactory:
             return Tokenizer(tokenizer=XLMRobertaTokenizer, name='xlm-roberta-base')
         elif self.type == 'CamemBERT':
             return Tokenizer(tokenizer=CamembertTokenizer, name='camembert-base')
+        elif self.type == 'PhoBERT':
+            return Tokenizer(tokenizer=AutoTokenizer, name='vinai/phobert-base')
         else:
             raise ValueError(f'Tokenizer {self.type} not found!')

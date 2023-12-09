@@ -5,7 +5,7 @@ from transformers import DistilBertModel
 
 
 class DistilBERTNewsVerificationModel(nn.Module):
-    def __init__(self, n_classes):
+    def __init__(self):
         super(DistilBERTNewsVerificationModel, self).__init__()
         self._name = 'DistilBERT'
         self.distilbert = DistilBertModel.from_pretrained('distilbert-base-uncased')
@@ -13,7 +13,7 @@ class DistilBERTNewsVerificationModel(nn.Module):
         self.conv_layer = nn.Conv1d(in_channels=self.distilbert.config.hidden_size, out_channels=32, kernel_size=3, padding=1)
         self.fc_text = nn.Linear(32, 64)
         self.fc_numeric = nn.Linear(1, 64)
-        self.fc_combined = nn.Linear(128, n_classes)
+        self.fc_combined = nn.Linear(128, 2)
         nn.init.normal_(self.fc_combined.weight, std=0.02)
         nn.init.normal_(self.fc_combined.bias, 0)
 

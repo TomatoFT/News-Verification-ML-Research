@@ -1,11 +1,12 @@
 from models.AlBERT import AlBERTNewsVerificationModel
 from models.BERT import BERTNewsVerificationModel
+from models.CamemBERT import CamemBERTNewsVerificationModel
 from models.DistilBERT import DistilBERTNewsVerificationModel
 from models.FlauBERT import FlauBERTNewsVerificationModel
 from models.MobileBERT import MobileBERTNewsVerificationModel
+from models.PhoBERT import PhoBERTNewsVerificationModel
 from models.RoBERTa import RoBERTaNewsVerificationModel
 from models.XLMNet import XLMNetNewsVerificationModel
-from models.CamemBERT import CamemBERTNewsVerificationModel
 
 
 class ModelsFactory:
@@ -29,5 +30,7 @@ class ModelsFactory:
             return XLMNetNewsVerificationModel()
         elif self.type == 'CamemBERT':
             return CamemBERTNewsVerificationModel()
+        elif self.type == 'PhoBERT':
+            return PhoBERTNewsVerificationModel()
         else:
             raise ValueError(f'The type is incorrect. Model {self.type} is implemented yet!')

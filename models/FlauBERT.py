@@ -6,7 +6,7 @@ from transformers import FlaubertModel, FlaubertTokenizer
 
 
 class FlauBERTNewsVerificationModel(nn.Module):
-    def __init__(self, n_classes):
+    def __init__(self):
         super(FlauBERTNewsVerificationModel, self).__init__()
         self._name = 'FlauBERT'
         self.flaubert = FlaubertModel.from_pretrained('flaubert/flaubert_base_cased')
@@ -14,7 +14,7 @@ class FlauBERTNewsVerificationModel(nn.Module):
         self.conv_layer = nn.Conv1d(in_channels=self.flaubert.config.hidden_size, out_channels=32, kernel_size=3, padding=1)
         self.fc_text = nn.Linear(32, 64)
         self.fc_numeric = nn.Linear(1, 64)
-        self.fc_combined = nn.Linear(128, n_classes)
+        self.fc_combined = nn.Linear(128, 2)
         nn.init.normal_(self.fc_combined.weight, std=0.02)
         nn.init.normal_(self.fc_combined.bias, 0)
 
