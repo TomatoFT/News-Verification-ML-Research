@@ -1,16 +1,17 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from transformers import MobileBertModel
+from transformers import XLMRobertaModel
 
 
-class MobileBERTNewsVerificationModel(nn.Module):
+class XLMNetNewsVerificationModel(nn.Module):
     def __init__(self):
-        super(MobileBERTNewsVerificationModel, self).__init__()
-        self._name = 'MobileBERT'
-        self.mobilebert = MobileBertModel.from_pretrained('google/mobilebert-uncased')
+        super(XLMNetNewsVerificationModel, self).__init__()
+        self._name = 'XLMNet'
+        self.xlmroberta = XLMRobertaModel.from_pretrained('xlm-roberta-base')
         self.drop = nn.Dropout(p=0.3)
-        self.conv_layer = nn.Conv1d(in_channels=self.mobilebert.config.hidden_size, out_channels=32, kernel_size=3, padding=1)
+        self.conv_layer = nn.Conv1d(in_channels=self.xlmroberta.config.hidden_size, 
+                                    out_channels=32, kernel_size=3, padding=1)
         self.fc_text = nn.Linear(32, 64)
         self.fc_numeric = nn.Linear(1, 64)
         self.fc_combined = nn.Linear(128, 2)
@@ -18,7 +19,7 @@ class MobileBERTNewsVerificationModel(nn.Module):
         nn.init.normal_(self.fc_combined.bias, 0)
 
     def forward(self, input_ids, attention_mask, numeric):
-        output = self.mobilebert(
+        output = self.xlmroberta(
             input_ids=input_ids,
             attention_mask=attention_mask,
             return_dict=True
@@ -39,5 +40,3 @@ class MobileBERTNewsVerificationModel(nn.Module):
         combined = self.drop(combined)
         output = self.fc_combined(combined)
         return output
-
-

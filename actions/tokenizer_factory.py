@@ -1,5 +1,6 @@
 from transformers import (AlbertTokenizer, BertTokenizer, DistilBertTokenizer,
-                          FlaubertTokenizer, RobertaTokenizer, MobileBertTokenizer)
+                          FlaubertTokenizer, MobileBertTokenizer,
+                          RobertaTokenizer, XLMRobertaTokenizer)
 
 
 class Tokenizer:
@@ -25,5 +26,7 @@ class TokenizerFactory:
             return Tokenizer(tokenizer=FlaubertTokenizer, name='flaubert/flaubert_base_cased')
         elif self.type == 'MobileBERT':
             return Tokenizer(tokenizer=MobileBertTokenizer, name='google/mobilebert-uncased')
+        elif self.type == 'XLMNet':
+            return Tokenizer(tokenizer=XLMRobertaTokenizer, name='xlm-roberta-base')
         else:
             raise ValueError(f'Tokenizer {self.type} not found!')
