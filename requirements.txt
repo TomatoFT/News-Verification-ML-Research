@@ -1,2 +1,3 @@
 torch==2.0.1
 transformers==4.35.2
+sacremoses==0.1.1
