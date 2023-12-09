@@ -2,11 +2,11 @@ from torch.utils.data import DataLoader
 from transformers import BertTokenizer
 
 from actions.dataloader import CustomDataset
-
+from actions.tokenizer_factory import TokenizerFactory
 
 class GetDataLoader:
-    def __init__(self, tokenizer_name, data=None):
-        self.tokenizer_name = tokenizer_name
+    def __init__(self, tokenizer_type, data=None):
+        self.tokenizer_type = tokenizer_type
         if not data:
             self.data = [
                     {'text': 'Tôi thích PyTorch rất nhiều', 'numeric': 3.14, 'target': 1},
@@ -23,7 +23,7 @@ class GetDataLoader:
         targets = [d['target'] for d in self.data]
 
         # Initialize the tokenizer and prepare the dataset
-        tokenizer = BertTokenizer.from_pretrained(self.tokenizer_name)
+        tokenizer = self.tokenizer_type.tokenizer.from_pretrained(self.tokenizer_type.name)
         max_length = 32
         dataset = CustomDataset(texts, numeric_features, targets, tokenizer, max_length)
 

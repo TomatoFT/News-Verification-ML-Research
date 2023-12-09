@@ -5,8 +5,8 @@ import yaml
 from actions.evaluation import Evaluate
 from actions.get_dataloader import GetDataLoader
 from actions.training import TrainingDeepLearningModel
+from actions.tokenizer_factory import TokenizerFactory
 from models.BERT import BERTNewsVerificationModel
-
 
 def read_config(file_path: str):
     with open(file_path, 'r') as file:
@@ -15,10 +15,13 @@ def read_config(file_path: str):
 
 config = read_config(file_path='models/config.yaml')
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+model = BERTNewsVerificationModel()
 
-dataloader = GetDataLoader(tokenizer_name='bert-base-uncased').get_dataloader(batch_size=2)
-model = BERTNewsVerificationModel() 
-optimizer = torch.optim.AdamW(model.parameters(), lr=float(config['hyperparameters']['learning_rate']))
+tokenizer_type = TokenizerFactory(type=model._name).get_tokenizer()
+
+dataloader = GetDataLoader(tokenizer_type=tokenizer_type).get_dataloader(batch_size=2)
+optimizer = torch.optim.AdamW(model.parameters(), 
+                              lr=float(config['hyperparameters']['learning_rate']))
 criterion = nn.CrossEntropyLoss()
 
 

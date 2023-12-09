@@ -1,8 +1,10 @@
 # config.yaml
-version: 1
+version: 1.0.0
 
 hyperparameters:
   num_epochs: 5
   learning_rate: 1e-5
 
+dataloader:
+  batch_size: 2
 

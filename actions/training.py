@@ -43,7 +43,7 @@ class TrainingDeepLearningModel:
             print(f"Epoch {epoch+1}/{self.num_epochs} - Loss: {avg_loss:.4f}")
 
         # Optionally, save the trained model
-        torch.save(self.model.state_dict(), 'saved_models/sentiment_classifier.pth')
+        torch.save(self.model.state_dict(), f'saved_models/{self.model._name}_news_verification.pth')
 
     def training(self, dry_run=True):
         if dry_run:
