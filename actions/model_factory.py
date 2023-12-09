@@ -5,6 +5,7 @@ from models.FlauBERT import FlauBERTNewsVerificationModel
 from models.MobileBERT import MobileBERTNewsVerificationModel
 from models.RoBERTa import RoBERTaNewsVerificationModel
 from models.XLMNet import XLMNetNewsVerificationModel
+from models.CamemBERT import CamemBERTNewsVerificationModel
 
 
 class ModelsFactory:
@@ -26,5 +27,7 @@ class ModelsFactory:
             return MobileBERTNewsVerificationModel()
         elif self.type == 'XLMNet':
             return XLMNetNewsVerificationModel()
+        elif self.type == 'CamemBERT':
+            return CamemBERTNewsVerificationModel()
         else:
             raise ValueError(f'The type is incorrect. Model {self.type} is implemented yet!')
