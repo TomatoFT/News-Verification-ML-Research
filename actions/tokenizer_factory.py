@@ -34,4 +34,4 @@ class TokenizerFactory:
         elif self.type == 'PhoBERT':
             return Tokenizer(tokenizer=AutoTokenizer, name='vinai/phobert-base')
         else:
-            raise ValueError(f'Tokenizer {self.type} not found!')
+            raise ValueError(f'The type is incorrect or the tokenizer {self.type} is not implemented yet!')

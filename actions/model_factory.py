@@ -33,4 +33,4 @@ class ModelsFactory:
         elif self.type == 'PhoBERT':
             return PhoBERTNewsVerificationModel()
         else:
-            raise ValueError(f'The type is incorrect. Model {self.type} is implemented yet!')
+            raise ValueError(f'The type is incorrect or the model {self.type} is implemented yet!')

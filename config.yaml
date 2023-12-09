@@ -8,3 +8,14 @@ hyperparameters:
 dataloader:
   batch_size: 2
 
+models:
+  - AlBERT
+  - BERT
+  - CamemBERT
+  - DistilBERT
+  - FlauBERT
+  - MobileBERT
+  - PhoBERT
+  - RoBERTa
+  - XLMNet
+
