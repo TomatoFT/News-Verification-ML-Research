@@ -1,7 +1,8 @@
 import torch
 import torch.nn as nn
-from transformers import DistilBertModel
 import torch.nn.functional as F
+from transformers import DistilBertModel
+
 
 class DistilBERTNewsVerificationModel(nn.Module):
     def __init__(self, n_classes):

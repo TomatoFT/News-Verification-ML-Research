@@ -1,8 +1,7 @@
 from torch.utils.data import DataLoader
-from transformers import BertTokenizer
 
 from actions.dataloader import CustomDataset
-from actions.tokenizer_factory import TokenizerFactory
+
 
 class GetDataLoader:
     def __init__(self, tokenizer_type, data=None):

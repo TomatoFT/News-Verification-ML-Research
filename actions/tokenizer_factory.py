@@ -1,5 +1,6 @@
 from transformers import BertTokenizer, DistilBertTokenizer
 
+
 class Tokenizer:
     def __init__(self, tokenizer, name):
         self.tokenizer = tokenizer
