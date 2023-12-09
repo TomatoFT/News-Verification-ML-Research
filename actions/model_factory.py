@@ -1,5 +1,6 @@
 from models.BERT import BERTNewsVerificationModel
 from models.DistilBERT import DistilBERTNewsVerificationModel
+from models.RoBERTa import RoBERTaNewsVerificationModel
 
 
 class ModelsFactory:
@@ -11,5 +12,7 @@ class ModelsFactory:
             return BERTNewsVerificationModel()
         elif self.type == 'DistilBERT':
             return DistilBERTNewsVerificationModel()
+        elif self.type == 'RoBERTa':
+            return RoBERTaNewsVerificationModel()
         else:
             raise ValueError(f'Model {self.type} not found!')

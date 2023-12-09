@@ -14,10 +14,10 @@ def read_config(file_path: str):
         config = yaml.safe_load(file)
     return config
 
-config = read_config(file_path='models/config.yaml')
+config = read_config(file_path='config.yaml')
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-model = ModelsFactory(type='BERT').get_model()
+model = ModelsFactory(type='RoBERTa').get_model()
 
 tokenizer_type = TokenizerFactory(type=model._name).get_tokenizer()
 
