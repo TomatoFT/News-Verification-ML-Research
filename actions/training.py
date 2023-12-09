@@ -4,12 +4,13 @@ import torch
 
 
 class TrainingDeepLearningModel:
-    def __init__(self, model, optimizer, criterion, dataloader, num_epochs):
+    def __init__(self, model, optimizer, criterion, dataloader, num_epochs, device):
         self.model = model
         self.optimizer = optimizer
         self.criterion = criterion
         self.dataloader = dataloader
         self.num_epochs = num_epochs
+        self.device = device
 
     def dry_run_training(self):
         for epoch in range (self.num_epochs):
@@ -18,17 +19,16 @@ class TrainingDeepLearningModel:
             
 
     def wet_run_training(self):
-        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        self.model.to(device)
+        self.model.to(self.device)
 
         for epoch in range(self.num_epochs):
             self.model.train()
             total_loss = 0
             for batch in self.dataloader:
-                input_ids = batch['input_ids'].to(device)
-                attention_mask = batch['attention_mask'].to(device)
-                numeric = batch['numeric'].to(device)
-                target = batch['target'].to(device)
+                input_ids = batch['input_ids'].to(self.device)
+                attention_mask = batch['attention_mask'].to(self.device)
+                numeric = batch['numeric'].to(self.device)
+                target = batch['target'].to(self.device)
 
                 self.optimizer.zero_grad()
 
