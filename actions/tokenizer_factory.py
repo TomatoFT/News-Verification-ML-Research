@@ -1,5 +1,5 @@
 from transformers import (AlbertTokenizer, BertTokenizer, DistilBertTokenizer,
-                          FlaubertTokenizer, RobertaTokenizer)
+                          FlaubertTokenizer, RobertaTokenizer, MobileBertTokenizer)
 
 
 class Tokenizer:
@@ -23,5 +23,7 @@ class TokenizerFactory:
             return Tokenizer(tokenizer=AlbertTokenizer, name='albert-base-v2')
         elif self.type == 'FlauBERT':
             return Tokenizer(tokenizer=FlaubertTokenizer, name='flaubert/flaubert_base_cased')
+        elif self.type == 'MobileBERT':
+            return Tokenizer(tokenizer=MobileBertTokenizer, name='google/mobilebert-uncased')
         else:
             raise ValueError(f'Tokenizer {self.type} not found!')
