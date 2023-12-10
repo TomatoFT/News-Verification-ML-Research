@@ -7,6 +7,7 @@ from transformers import BertModel, BertTokenizer
 class RetriBERTNewsVerificationModel(nn.Module):
     def __init__(self):
         super(RetriBERTNewsVerificationModel, self).__init__()
+        self._name = 'RetriBERT'
         self.bert_model = BertModel.from_pretrained('yjernite/retribert-base-uncased')
         self.drop = nn.Dropout(p=0.3)
         self.fc_numeric = nn.Linear(1, 64)

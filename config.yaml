@@ -13,7 +13,7 @@ models:
   - BERT
   - CamemBERT
   - DistilBERT
-  - FlauBERT
+  - RetriBERT
   - MobileBERT
   - PhoBERT
   - RoBERTa
