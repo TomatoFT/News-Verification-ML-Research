@@ -1,9 +1,11 @@
 import torch
 import torch.nn as nn
 import yaml
+from pyspark.sql import SparkSession
 
 from actions.evaluation import Evaluate
 from actions.get_dataloader import GetDataLoader
+from actions.load_data import load_csv_into_spark
 from actions.model_factory import ModelsFactory
 from actions.tokenizer_factory import TokenizerFactory
 from actions.training import TrainingDeepLearningModel
@@ -22,7 +24,13 @@ for model_index in config['models']:
 
     tokenizer_type = TokenizerFactory(type=model._name).get_tokenizer()
 
-    dataloader = GetDataLoader(
+    # Create a Spark session
+    spark = SparkSession.builder.appName("example").getOrCreate()
+
+    file_path = "/content/drive/MyDrive/data.csv"
+    data = load_csv_into_spark(file_path, spark)
+
+    dataloader = GetDataLoader(data=data,
         tokenizer_type=tokenizer_type).get_dataloader(
             batch_size=config['dataloader']['batch_size'])
 
