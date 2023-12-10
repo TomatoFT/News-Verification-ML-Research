@@ -1,6 +1,7 @@
 import time
 
 import torch
+from tqdm import tqdm
 
 
 class TrainingDeepLearningModel:
@@ -20,26 +21,26 @@ class TrainingDeepLearningModel:
     def wet_run_training(self, is_saved=True, output_dir=None):
         self.model.to(self.device)
 
-        for epoch in range(self.num_epochs):
-            self.model.train()
-            total_loss = 0
-            for batch in self.dataloader:
-                input_ids = batch['input_ids'].to(self.device)
-                attention_mask = batch['attention_mask'].to(self.device)
-                numeric = batch['numeric'].to(self.device)
-                target = batch['target'].to(self.device)
+        with tqdm(dataloader, desc=f"Epoch {epoch+1}/{num_epochs}", unit="batch") as t_batch:
+            for batch in t_batch:
+                input_ids = batch['input_ids'].to(device)
+                attention_mask = batch['attention_mask'].to(device)
+                numeric = batch['numeric'].to(device)
+                target = batch['target'].to(device)
 
-                self.optimizer.zero_grad()
+                optimizer.zero_grad()
 
-                output = self.model(input_ids, attention_mask, numeric)
-                loss = self.criterion(output, target)
+                output = model(input_ids, attention_mask, numeric)
+                loss = criterion(output, target)
                 total_loss += loss.item()
 
                 loss.backward()
-                self.optimizer.step()
+                optimizer.step()
 
-            avg_loss = total_loss / len(self.dataloader)
-            print(f"Epoch {epoch+1}/{self.num_epochs} - Loss: {avg_loss:.4f}")
+                t_batch.set_postfix(loss=loss.item())
+
+        avg_loss = total_loss / len(dataloader)
+        print(f"Epoch {epoch+1}/{num_epochs} - Loss: {avg_loss:.4f}")
         
         if is_saved:
             self.save_model(output_dir=output_dir)
