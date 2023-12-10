@@ -2,9 +2,9 @@ from models.AlBERT import AlBERTNewsVerificationModel
 from models.BERT import BERTNewsVerificationModel
 from models.CamemBERT import CamemBERTNewsVerificationModel
 from models.DistilBERT import DistilBERTNewsVerificationModel
-from models.FlauBERT import FlauBERTNewsVerificationModel
 from models.MobileBERT import MobileBERTNewsVerificationModel
 from models.PhoBERT import PhoBERTNewsVerificationModel
+from models.RetriBERT import RetriBERTNewsVerificationModel
 from models.RoBERTa import RoBERTaNewsVerificationModel
 from models.XLMNet import XLMNetNewsVerificationModel
 
@@ -22,8 +22,8 @@ class ModelsFactory:
             return RoBERTaNewsVerificationModel()
         elif self.type == 'AlBERT':
             return AlBERTNewsVerificationModel()
-        elif self.type == 'FlauBERT':
-            return FlauBERTNewsVerificationModel()
+        elif self.type == 'RetriBERT':
+            return RetriBERTNewsVerificationModel()
         elif self.type == 'MobileBERT':
             return MobileBERTNewsVerificationModel()
         elif self.type == 'XLMNet':

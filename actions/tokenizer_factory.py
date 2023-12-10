@@ -1,7 +1,7 @@
 from transformers import (AlbertTokenizer, AutoTokenizer, BertTokenizer,
                           CamembertTokenizer, DistilBertTokenizer,
-                          FlaubertTokenizer, MobileBertTokenizer,
-                          RobertaTokenizer, XLMRobertaTokenizer)
+                          MobileBertTokenizer, RobertaTokenizer,
+                          XLMRobertaTokenizer)
 
 
 class Tokenizer:
@@ -23,8 +23,8 @@ class TokenizerFactory:
             return Tokenizer(tokenizer=RobertaTokenizer, name='roberta-base')
         elif self.type == 'AlBERT':
             return Tokenizer(tokenizer=AlbertTokenizer, name='albert-base-v2')
-        elif self.type == 'FlauBERT':
-            return Tokenizer(tokenizer=FlaubertTokenizer, name='flaubert/flaubert_base_cased')
+        elif self.type == 'RetriBERT':
+            return Tokenizer(tokenizer=BertTokenizer, name='yjernite/retribert-base-uncased')
         elif self.type == 'MobileBERT':
             return Tokenizer(tokenizer=MobileBertTokenizer, name='google/mobilebert-uncased')
         elif self.type == 'XLMNet':
