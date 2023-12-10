@@ -1,5 +1,6 @@
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
+
 def preload_summarization_model():
     tokenizer = AutoTokenizer.from_pretrained(
         "VietAI/vit5-large-vietnews-summarization"
