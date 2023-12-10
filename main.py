@@ -25,7 +25,7 @@ model = ModelsFactory(type='BERT').get_model()
 
 tokenizer_type = TokenizerFactory(type=model._name).get_tokenizer()
 
-file_path = "/content/drive/MyDrive/data.csv"
+file_path = "/home/tomato/Downloads/data.csv"
 data = load_csv_into_spark(file_path, spark)
 
 dataloader = GetDataLoader(data=data,
