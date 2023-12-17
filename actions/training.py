@@ -5,13 +5,14 @@ from tqdm import tqdm
 
 
 class TrainingDeepLearningModel:
-    def __init__(self, model, optimizer, criterion, dataloader, num_epochs, device):
+    def __init__(self, model, checkpoint, optimizer, criterion, dataloader, num_epochs, device):
         self.model = model
         self.optimizer = optimizer
         self.criterion = criterion
         self.dataloader = dataloader
         self.num_epochs = num_epochs
         self.device = device
+        self.checkpoint = checkpoint
 
     def dry_run_training(self):
         for epoch in range (self.num_epochs):
@@ -20,6 +21,19 @@ class TrainingDeepLearningModel:
 
     def wet_run_training(self, is_saved=True, output_dir=None):
         self.model.to(self.device)
+        # Check if the pre-trained model file exists
+        if torch.cuda.is_available():
+            checkpoint = torch.load(self.checkpoint)
+        else:
+            checkpoint = torch.load(self.checkpoint, map_location=torch.device('cpu'))
+
+        if 'state_dict' in checkpoint:
+            # Load the pre-trained weights
+            self.model.load_state_dict(checkpoint['state_dict'])
+            print("Pre-trained model loaded successfully!")
+        else:
+            print("No pre-trained model found. Training from scratch.")
+
         for epoch in range(self.num_epochs):
             self.model.train()
             total_loss = 0

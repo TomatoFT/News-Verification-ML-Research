@@ -19,3 +19,5 @@ models:
   - RoBERTa
   - XLMNet
 
+data:
+  file_path: /home/tomato/Downloads/data.csv

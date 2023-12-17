@@ -40,7 +40,8 @@ criterion = nn.CrossEntropyLoss()
 training_deeplearning = TrainingDeepLearningModel(model=model, optimizer=optimizer, 
                         criterion=criterion, dataloader=dataloader, 
                         num_epochs=config['hyperparameters']['num_epochs'],
-                        device=device)
+                        device=device,
+                        checkpoint=f'{model._name}_news_verification.pth')
 
 training_deeplearning.training(dry_run=False)
 

@@ -2,8 +2,9 @@ torch==2.0.1
 transformers==4.35.2
 sacremoses==0.1.1
 SentencePiece==0.1.99
-pyspark==3.5.0
+pyspark==3.2.1
 tqdm==4.66.1
 underthesea==6.8.0
 pyvi==0.1.1
 sentence_transformers==2.2.2
+numpy==1.21.2
