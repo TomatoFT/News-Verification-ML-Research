@@ -47,6 +47,9 @@ training_deeplearning.training(dry_run=False)
 
 print('Done Training')
 
+# ===========================================================================================================
+
+print("="*10, "Evaluation", "="*10)
 evaluator = Evaluate(model, dataloader, device)
 accuracy, precision, recall, f1 = evaluator.evaluate_model()
 

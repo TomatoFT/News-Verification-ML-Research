@@ -17,14 +17,11 @@ class GetDataLoader:
             self.data = data
 
     def get_dataset(self):
-        texts = [d['text'] for d in self.data]
-        numeric_features = [d['numeric'] for d in self.data]
-        targets = [d['target'] for d in self.data]
 
         # Initialize the tokenizer and prepare the dataset
         tokenizer = self.tokenizer_type.tokenizer.from_pretrained(self.tokenizer_type.name)
         max_length = 32
-        dataset = CustomDataset(texts, numeric_features, targets, tokenizer, max_length)
+        dataset = CustomDataset(self.data, tokenizer, max_length)
 
         return dataset
     

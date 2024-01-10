@@ -1,25 +1,29 @@
 import torch
 from torch.utils.data import Dataset
 
-
 class CustomDataset(Dataset):
-    def __init__(self, texts, numeric_features, targets, tokenizer, max_length):
-        self.texts = texts
-        self.numeric_features = numeric_features
-        self.targets = targets
+    def __init__(self, data, tokenizer, max_length):
         self.tokenizer = tokenizer
         self.max_length = max_length
+        self.titles = [d['title'] for d in data]
+        self.contents = [d['content'] for d in data]
+        self.numeric_features = [[d['credit'], d['media']] for d in data]  # Added numeric features
+        self.targets = [d['target'] for d in data]
 
     def __len__(self):
-        return len(self.texts)
+        return len(self.contents)
 
     def __getitem__(self, idx):
-        text = str(self.texts[idx])
-        numeric = self.numeric_features[idx]
-        target = self.targets[idx]
+        title = str(self.titles[idx])
+        content = str(self.contents[idx])
+        numeric = torch.tensor(self.numeric_features[idx], dtype=torch.float)
+        target = torch.tensor(self.targets[idx], dtype=torch.long)
+
+        # Concatenate title and content
+        concatenated_text = title + " " + content
 
         encoded_text = self.tokenizer.encode_plus(
-            text,
+            concatenated_text,
             add_special_tokens=True,
             max_length=self.max_length,
             padding='max_length',
@@ -30,6 +34,6 @@ class CustomDataset(Dataset):
         return {
             'input_ids': encoded_text['input_ids'].squeeze(0),
             'attention_mask': encoded_text['attention_mask'].squeeze(0),
-            'numeric': torch.tensor(numeric, dtype=torch.float),
-            'target': torch.tensor(target, dtype=torch.long)
+            'numeric': numeric,
+            'target': target
         }
