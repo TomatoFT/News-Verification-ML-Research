@@ -8,10 +8,10 @@ class GetDataLoader:
         self.tokenizer_type = tokenizer_type
         if not data:
             self.data = [
-                    {'text': 'Tôi thích PyTorch rất nhiều', 'numeric': 3.14, 'target': 1},
-                    {'text': 'Deep learning là học sâu', 'numeric': 2.71, 'target': 0},
-                    {'text': 'PyTorch là thư viện deep learning', 'numeric': 1.618, 'target': 1},
-                    {'text': 'Machine learning rất là hay', 'numeric': 0.577, 'target': 0}
+                        {'credit': 0.5, 'title': 'Title 1', 'content': 'Content 1', 'media': 3.14, 'target': 1},
+                        {'credit': 0.5, 'title': 'Title 2', 'content': 'Content 2', 'media': 2.71, 'target': 0},
+                        {'credit': 0.5, 'title': 'Title 3', 'content': 'Content 3', 'media': 1.618, 'target': 1},
+                        {'credit': 0.5, 'title': 'Title 4', 'content': 'Content 4', 'media': 0.577, 'target': 0}
                     ]
         else:
             self.data = data
